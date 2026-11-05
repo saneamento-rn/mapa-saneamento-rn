@@ -100,6 +100,12 @@ header p{margin:4px 0 0;color:var(--muted);font-size:14px}
 .btn-row{display:flex;gap:8px;margin-top:4px}
 
 .photo-preview{position:relative;display:inline-block;max-width:220px;margin-top:10px}
+.privacy-overlay{position:fixed;inset:0;background:rgba(5,15,26,.72);backdrop-filter:blur(2px);z-index:20000;display:flex;align-items:center;justify-content:center;padding:20px}
+.privacy-overlay[hidden]{display:none}
+.privacy-modal{background:var(--surface);color:var(--ink);border:1px solid var(--line-soft);border-radius:8px;max-width:440px;width:100%;padding:22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.privacy-modal h2{margin:0 0 10px;font-size:17px;font-family:var(--font-display)}
+.privacy-modal p{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.privacy-modal .btn{width:100%;margin-top:6px}
 .photo-preview img{display:block;width:100%;border-radius:4px;border:1px solid var(--line-soft)}
 .btn-remove-photo{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:none;background:rgba(0,0,0,.65);color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:transform .12s ease}
 .btn-remove-photo:active{transform:scale(.88)}
@@ -114,6 +120,21 @@ a{color:var(--line)}
 </style>
 </head>
 <body>
+
+<div class="privacy-overlay" id="privacy-overlay" hidden>
+  <div class="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <h2 id="privacy-title">Sobre seus dados</h2>
+    <p>
+      Este mapa coleta nome, endereço aproximado, localização e foto (quando enviada)
+      apenas para o mapeamento do projeto de extensão universitária sobre saneamento
+      em Ribeirão das Neves. Os dados não são vendidos nem repassados a terceiros.
+    </p>
+    <p>
+      Para pedir a remoção do seu registro, entre em contato com a equipe do projeto.
+    </p>
+    <button type="button" class="btn btn-primary" id="btn-privacy-ok">Entendi, continuar</button>
+  </div>
+</div>
 <div class="wrap">
 
   <header>
@@ -226,6 +247,20 @@ a{color:var(--line)}
 <script>
 (function(){
 "use strict";
+
+/* ===== Pop-up de privacidade: aparece uma vez por navegador ===== */
+(function(){
+  var CONSENT_KEY = "saneamentoRN_consentOk";
+  var overlay = document.getElementById("privacy-overlay");
+  var btnOk = document.getElementById("btn-privacy-ok");
+  var jaConcordou = false;
+  try { jaConcordou = localStorage.getItem(CONSENT_KEY) === "1"; } catch (err) {}
+  if (!jaConcordou) { overlay.hidden = false; }
+  btnOk.addEventListener("click", function(){
+    overlay.hidden = true;
+    try { localStorage.setItem(CONSENT_KEY, "1"); } catch (err) {}
+  });
+})();
 
 /* ===== CONFIGURAÇÃO: troque pelo link do seu Google Apps Script implantado como Web App ===== */
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRq5oVka6pyxedNCDtjTivPEY3YHs9RTrP1Km5uXLwe5hi4leLLBlhsODAjHqONF0Atg/exec";
