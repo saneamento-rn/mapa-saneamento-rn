@@ -155,7 +155,7 @@ a{color:var(--line)}
       </div>
 
       <div class="form-field">
-        <label for="f-pesquisador">Nome do pesquisador(a) / morador(a) &mdash; opcional</label>
+        <label for="f-pesquisador">Nome do pesquisador(a) / morador(a)</label>
         <input type="text" id="f-pesquisador" placeholder="Quem está registrando">
       </div>
 
@@ -526,6 +526,12 @@ function showToast(msg){
 document.getElementById("point-form").addEventListener("submit", function(ev){
   ev.preventDefault();
   if (current.lat == null){ showToast("Selecione um local no mapa primeiro."); return; }
+  var nomeEl = document.getElementById("f-pesquisador");
+  if (!nomeEl.value.trim()){
+    showToast("Preencha seu nome antes de enviar.");
+    nomeEl.focus();
+    return;
+  }
   var tipoEl = document.querySelector('#f-tipo input:checked');
   var freqEl = document.querySelector('#f-frequencia input:checked');
   var durEl = document.querySelector('#f-duracao input:checked');
