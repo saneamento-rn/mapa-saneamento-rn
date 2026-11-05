@@ -102,7 +102,7 @@ header p{margin:4px 0 0;color:var(--muted);font-size:14px}
 .photo-preview{position:relative;display:inline-block;max-width:220px;margin-top:10px}
 .privacy-overlay{position:fixed;inset:0;background:rgba(5,15,26,.72);backdrop-filter:blur(2px);z-index:20000;display:flex;align-items:center;justify-content:center;padding:20px}
 .privacy-overlay[hidden]{display:none}
-.privacy-modal{background:var(--surface);color:var(--ink);border:1px solid var(--line-soft);border-radius:8px;max-width:440px;width:100%;padding:22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.privacy-modal{background:var(--surface);color:var(--ink);border:1px solid var(--line-soft);border-radius:8px;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;padding:22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.4)}
 .privacy-modal h2{margin:0 0 10px;font-size:17px;font-family:var(--font-display)}
 .privacy-modal p{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:var(--muted)}
 .privacy-modal .btn{width:100%;margin-top:6px}
@@ -123,16 +123,19 @@ a{color:var(--line)}
 
 <div class="privacy-overlay" id="privacy-overlay" hidden>
   <div class="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
-    <h2 id="privacy-title">Sobre seus dados</h2>
+    <h2 id="privacy-title">Termo de Consentimento</h2>
     <p>
-      Este mapa coleta nome, endereço aproximado, localização e foto (quando enviada)
-      apenas para o mapeamento do projeto de extensão universitária sobre saneamento
-      em Ribeirão das Neves. Os dados não são vendidos nem repassados a terceiros.
+      Ao prosseguir, você declara estar ciente e de acordo com o fornecimento das
+      informações sobre a ocorrência relatada. Os dados coletados serão utilizados
+      para fins acadêmicos, de pesquisa, registro e mapeamento, podendo ser
+      compartilhados com instituições e órgãos competentes, quando pertinente, para
+      subsidiar estudos, análises e possíveis ações de melhoria.
     </p>
     <p>
-      Para pedir a remoção do seu registro, entre em contato com a equipe do projeto.
+      O tratamento das informações respeitará a privacidade dos envolvidos e as
+      disposições da Lei Geral de Proteção de Dados (Lei nº 13.709/2018 – LGPD).
     </p>
-    <button type="button" class="btn btn-primary" id="btn-privacy-ok">Entendi, continuar</button>
+    <button type="button" class="btn btn-primary" id="btn-privacy-ok">Concordo</button>
   </div>
 </div>
 <div class="wrap">
